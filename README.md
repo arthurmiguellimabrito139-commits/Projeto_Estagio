@@ -10,21 +10,21 @@ Simulador em console das mecânicas de uma nave espacial, desenvolvido para o de
 
 **Requisito:** ao atingir energia crítica, o núcleo precisa avisar Escudos, Luzes e Painéis de Navegação, e a estrutura deve permitir adicionar novos sistemas reagindo no futuro sem alterar o núcleo.
 
-**Por que Observer:** o padrão inverte a dependência — em vez do núcleo conhecer cada sistema por nome e chamar seus métodos diretamente, ele conhece só uma lista de observadores genéricos (`IObservadorNucleo`) e notifica todos quando o status muda. Isso cumpre exatamente a restrição do ticket: um sistema novo (ex: Suporte de Vida) só precisa implementar a interface e se inscrever — zero alteração dentro da classe `NucleoNave`.
+**Por que Observer:** o padrão inverte a dependência, em vez do núcleo conhecer cada sistema por nome e chamar seus métodos diretamente, ele conhece só uma lista de observadores genéricos (`IObservadorNucleo`) e notifica todos quando o status muda. Isso cumpre exatamente a restrição do ticket: um sistema novo (ex: Suporte de Vida) só precisa implementar a interface e se inscrever — zero alteração dentro da classe `NucleoNave`.
 
 ### Ticket 2 — Comportamento Dinâmico da Tripulação → **State**
 
 **Requisito:** trocar a função de um NPC vivo em tempo real, sem destruir o objeto e sem blocos de if/else ou switch decidindo o comportamento.
 
-**Por que State:** cada função (Canhoneiro, Piloto, Mecânico, etc.) vira sua própria classe, todas implementando o mesmo contrato (`IFuncaoTripulante`). O tripulante (`Tripulantes`) não decide como trabalhar — ele só guarda uma referência para a função atual e delega. Trocar de função é apenas trocar essa referência por outro objeto, sem destruir nem recriar o tripulante, e sem nenhum if/else decidindo comportamento.
+**Por que State:** Cada função (Canhoneiro, Piloto, Mecânico, etc.) vira sua própria classe, todas implementando o mesmo contrato (`IFuncaoTripulante`). O tripulante (`Tripulantes`) não decide como trabalhar — ele só guarda uma referência para a função atual e delega. Trocar de função é apenas trocar essa referência por outro objeto, sem destruir nem recriar o tripulante, e sem nenhum if/else decidindo comportamento.
 
-**Alternativa considerada e descartada:** inicialmente cogitei usar Factory Method para a criação das funções por já ter feitoum trabalho em POO. O Factory resolve bem o "como funciona" cada tipo de função, mas não resolve, sozinho, o problema central do ticket: trocar o comportamento de um tripulante "já existente" sem destruí-lo. Uma solução baseada só em Factory levaria a recriar o objeto `Tripulantes` inteiro a cada troca de função, o que violaria diretamente a restrição do briefing. Ja o State resolve isso separando a identidade do tripulante do comportamento atual.
+**Alternativa considerada e descartada:** inicialmente cogitei usar Factory Method para a criação das funções por já ter feito um trabalho em POO uasando o metodo. Porém, Factory Method resolve bem o "como funciona" cada tipo de função, mas não resolve sozinho o problema central do ticket: trocar o comportamento de um tripulante "já existente" sem destruí-lo. Uma solução baseada só em Factory levaria a recriar o objeto `Tripulantes` inteiro a cada troca de função, o que violaria diretamente a restrição do briefing. Ja o State resolve isso separando a identidade do tripulante do comportamento atual.
 
 ### Ticket 3 — Armamento Modular e Modificadores → **Decorator**
 
 **Requisito:** a nave deve emitir apenas o comando genérico de atirar, sem conhecer a física de cada arma, e os modificadores devem se empilhar dinamicamente sem gerar uma classe nova para cada combinação possível.
 
-**Por que Decorator:** tanto as armas base quanto os modificadores implementam a mesma interface (`IArma`). Um modificador "embrulha" outra arma (guarda uma referência para ela) e, ao disparar, primeiro deixa a arma interna atirar e depois soma seu próprio efeito. Isso permite empilhar camadas (ex: Laser + Dano de Fogo + Perfuração de Blindagem) sem nunca criar uma classe para cada combinação — a composição acontece em tempo de execução.
+**Por que Decorator:** Tanto as armas base quanto os modificadores implementam a mesma interface (`IArma`). Um modificador que "embrulha" outra arma e guarda uma referência para ela, ao disparar, primeiro deixa a arma interna atirar e depois soma seu próprio efeito. Isso permite empilhar camadas (ex: Laser + Dano de Fogo + Perfuração de Blindagem) sem nunca criar uma classe para cada combinação, a composição acontece em tempo de execução.
 
 ---
 
