@@ -18,6 +18,8 @@ Simulador em console das mecânicas de uma nave espacial, desenvolvido para o de
 
 **Por que State:** cada função (Canhoneiro, Piloto, Mecânico, etc.) vira sua própria classe, todas implementando o mesmo contrato (`IFuncaoTripulante`). O tripulante (`Tripulantes`) não decide como trabalhar — ele só guarda uma referência para a função atual e delega. Trocar de função é apenas trocar essa referência por outro objeto, sem destruir nem recriar o tripulante, e sem nenhum if/else decidindo comportamento.
 
+**Alternativa considerada e descartada:** inicialmente cogitei usar Factory Method para a criação das funções por já ter feitoum trabalho em POO. O Factory resolve bem o "como funciona" cada tipo de função, mas não resolve, sozinho, o problema central do ticket: trocar o comportamento de um tripulante "já existente" sem destruí-lo. Uma solução baseada só em Factory levaria a recriar o objeto `Tripulantes` inteiro a cada troca de função, o que violaria diretamente a restrição do briefing. Ja o State resolve isso separando a identidade do tripulante do comportamento atual.
+
 ### Ticket 3 — Armamento Modular e Modificadores → **Decorator**
 
 **Requisito:** a nave deve emitir apenas o comando genérico de atirar, sem conhecer a física de cada arma, e os modificadores devem se empilhar dinamicamente sem gerar uma classe nova para cada combinação possível.
@@ -136,6 +138,14 @@ Exemplo: `equipar_arma laser` → `adicionar_modificador dano_fogo` → `adicion
 Todos os três submenus tratam entradas inválidas (comando incompleto ou argumento inválido) sem encerrar o programa, retornando ao prompt do submenu.
 
 ---
+
+## Ideias de Melhoria Futura
+
+Algumas extensões que ficaram fora do escopo do desafio, mas que fariam sentido numa próxima iteração:
+
+- **Eficiência dos tripulantes:** tripulantes fora de sua função (ex: um Piloto forçado a trabalhar como Mecânico) teriam eficiência reduzida na tarefa. Isso poderia impactar o consumo de energia da nave — uma tripulação mal alocada aumentaria o gasto do núcleo, criando uma ligação direta entre os Tickets 1 e 2.
+- Comando para consultar o histórico de modificadores aplicados a uma arma, sem precisar disparar.
+- Persistência do estado da simulação entre execuções (salvar/carregar).
 
 ## Estrutura do Projeto
 
