@@ -78,7 +78,7 @@ Simulador em console das mecânicas de uma nave espacial, desenvolvido para o de
 
 ```bash
 git clone https://github.com/arthurmiguellimabrito139-commits/Projeto_Estagio.git
-cd Projeto_Estagio/SpaceshipLab
+cd Projeto_Estagio
 ```
 
 ### Compilar
