@@ -18,10 +18,10 @@ namespace SpaceshipLab
     /// </summary>
     class Programa
     {   
-
-        /// Recebe os argumentos de linha de comando (não usados aqui).
-        /// é o método que o .NET chama automaticamente
-        /// ao iniciar a execução do programa.
+        /// <summary>
+        /// Recebe os argumentos de linha de comando.
+        /// É o método que o .NET chama automaticamente ao iniciar a execução do programa.
+        /// </summary>
         static void Main(string[] args)
         {  
             // Cria o núcleo e inscreve os três observadores concretos.
@@ -39,7 +39,7 @@ namespace SpaceshipLab
             // Nave Client do padrão Decorator começa sem nenhuma arma equipada.
             var nave = new Nave();
             
-            // Menu para o jogador selecionar qual opção ele dejesa acessar da nave
+            // Menu para o jogador selecionar qual opção ele dejesa acessar da nave.
             while (true)
             {
                 Console.WriteLine("=== Simulador do Laboratório ===");
