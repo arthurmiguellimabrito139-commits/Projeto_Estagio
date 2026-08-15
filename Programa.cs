@@ -15,6 +15,7 @@ namespace SpaceshipLab
     /// cria a nave e o dicionário de tripulantes e conduz o menu principal,
     /// direcionando pra cada submenu (Núcleo, Tripulação, Armamento) conforme
     /// a opção escolhida pelo jogador.
+    /// <summary>
     class Programa
     {   
 
