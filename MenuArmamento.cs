@@ -19,7 +19,7 @@ namespace SpaceshipLab
         {
             Console.WriteLine("--- Armamento da Nave ---");
             Console.WriteLine("Comandos: equipar_arma <tipo> | adicionar_modificador <tipo> | atirar | voltar");
-            Console.WriteLine("Armas disponíveis: laser, misseis, canhao de fotóns");
+            Console.WriteLine("Armas disponíveis: laser, misseis, canhao_de_fotóns");
             Console.WriteLine("Modificadores disponíveis: dano_fogo, perfuração, toxico, paralisia");
             Console.WriteLine();
 
