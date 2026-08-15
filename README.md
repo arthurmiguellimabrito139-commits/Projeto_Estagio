@@ -150,7 +150,9 @@ Algumas extensões que ficaram fora do escopo do desafio, mas que fariam sentido
 ## Estrutura do Projeto
 
 ```
-SpaceshipLab/
+Projeto_Estagio/          (raiz do repositório)
+  SpaceshipLab.csproj
+  README.md
   Programa.cs
   MenuNucleo.cs
   MenuTripulacao.cs
